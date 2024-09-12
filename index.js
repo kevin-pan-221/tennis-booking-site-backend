@@ -25,6 +25,7 @@ app.get("/", async (req, res) => {
 
 // Get all students
 app.get("/students", async (req, res) => {
+	console.log("getting all students")
 	const collectionRef = collection(db, "Students");
 	const collectionSnap = await getDocs(collectionRef)
 	const docs = []
@@ -37,22 +38,14 @@ app.get("/students", async (req, res) => {
 // Add a new student
 app.post("/students", async (req, res) => {
 	const studentRef = collection(db, "Students");
-	const studentData = {
-		firstName: "First",
-		lastName: "Last",
-		concentrations: [
-			"Concentration One",
-			"Concentration Two",
-		],
-		classYear: "2028",
-	}
+	const studentBody = req.body
 	try {
-		await addDoc(studentRef, studentData)
+		await addDoc(studentRef, studentBody)
 	} catch (e) {
 		console.error(e)
-		res.send(500) // Error
+		res.status(500);
 	}
-	res.send(200, "Succesfully Created Student")
+	res.status(200).send("Succesfully Created Student")
 })
 
 function start() {
