@@ -23,6 +23,7 @@ app.get("/", async (req, res) => {
 	res.send("Hello World!");
 });
 
+/*
 // Get all students
 app.get("/students", async (req, res) => {
 	console.log("getting all students")
@@ -34,18 +35,31 @@ app.get("/students", async (req, res) => {
 	})
 	res.send(docs)
 })
+*/
 
-// Add a new student
-app.post("/students", async (req, res) => {
-	const studentRef = collection(db, "Students");
-	const studentBody = req.body
+// Get guest count
+app.get("/guest", async (req, res) => {
+	console.log("getting guest count")
+	const collectionRef = collection(db, "Guest Database");
+	const collectionSnap = await getDocs(collectionRef)
+	// const docs = []
+	// collectionSnap.forEach((doc) => {
+        // 		docs.push(doc.data())
+	// })
+	res.send(collectionSnap.size.toString())
+})
+
+// Add a new guest
+app.post("/guest", async (req, res) => {
+	const guestRef = collection(db, "Guest Database");
+	const guestBody = req.body
 	try {
-		await addDoc(studentRef, studentBody)
+		await addDoc(guestRef, guestBody)
 	} catch (e) {
 		console.error(e)
 		res.status(500);
 	}
-	res.status(200).send("Succesfully Created Student")
+	res.status(200).send("Succesfully added a guest.")
 })
 
 function start() {
