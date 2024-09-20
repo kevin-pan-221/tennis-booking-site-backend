@@ -18,13 +18,7 @@ app.use(
 )
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Create a route at http://localhost:8080/testRoute. You can try it with your browser!
-app.get("/", async (req, res) => {
-	res.send("Hello World!");
-});
-
-
-// Get guest count
+// gets the guest count from the database
 app.get("/guest", async (req, res) => {
 	console.log("getting guest count")
 	const collectionRef = collection(db, "Guest Database");
@@ -32,7 +26,7 @@ app.get("/guest", async (req, res) => {
 	res.send(collectionSnap.size.toString())
 })
 
-// Add a new guest
+// posts a new guest to the database
 app.post("/guest", async (req, res) => {
 	console.log("adding a guest")
 	const guestRef = collection(db, "Guest Database");
@@ -46,21 +40,16 @@ app.post("/guest", async (req, res) => {
 	res.status(200).send("Succesfully added a guest.")
 })
 
-// Deregister guest
+// removes a guest from the database
 app.post("/remove_guest", async (req, res) => {
 	console.log("removing a guest")
 	const guestInfoRef = collection(db, "Guest Database");
 	const phoneNumber = req.body.phoneNumber
-	try {   // Create a query to find the document(s)
+	try { 
 		const q = query(guestInfoRef, where("phoneNumber", "==", phoneNumber));
-
-		// Get the matching documents
 		const querySnapshot = await getDocs(q);
-
-		// Loop through the documents and delete them
 		querySnapshot.forEach((doc) => {
 			console.log(doc.data())
-			// doc.ref.delete();
 			deleteDoc(doc.ref);
 		});
 	} catch (e) {
