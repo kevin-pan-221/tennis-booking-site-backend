@@ -1,19 +1,19 @@
-// In this file we will initialize our firebase database
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCWrzsW3GD9V9ULch6xZuw5o1T4JqbxYb8",
-  authDomain: "eventregistration-a93d7.firebaseapp.com",
-  projectId: "eventregistration-a93d7",
-  storageBucket: "eventregistration-a93d7.appspot.com",
-  messagingSenderId: "70408265571",
-  appId: "1:70408265571:web:1a1ade401da5fda7407d56",
-  measurementId: "G-YD6C2DEQ24"
+  apiKey: "AIzaSyDTOaFgSUMxkE4osJ6_cOABbdWm0jNW7QE",
+  authDomain: "fsab-tennis-booking.firebaseapp.com",
+  projectId: "fsab-tennis-booking",
+  storageBucket: "fsab-tennis-booking.appspot.com",
+  messagingSenderId: "726581489803",
+  appId: "1:726581489803:web:0abf0dfa6b65daec4fa48e",
+  measurementId: "G-TD8F15ED5S"
 };
 
 // Initialize Firebase
